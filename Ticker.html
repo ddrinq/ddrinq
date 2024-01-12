@@ -1,0 +1,361 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="pageContainer" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-y: auto;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            background-color: #ddd;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        li {
+            float: left;
+            border-right: 1px solid #bbb;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+        }
+
+            li:last-child {
+                border-right: none;
+            }
+
+            li a {
+                display: block;
+                color: #333;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                border-radius: 5px;
+                transition: background-color 0.3s;
+                font-weight: normal;
+            }
+
+            li:hover {
+                background-color: #444;
+                color: white;
+            }
+
+                li:hover a {
+                    color: white;
+                    font-weight: bold;
+                }
+
+        .summary-list {
+            margin: 20px;
+        }
+
+            .summary-list ul {
+                list-style-type: disc;
+                background-color: white;
+                padding-left: 10px;
+            }
+
+            .summary-list li {
+                color: #555;
+                margin-bottom: 4px;
+            }
+
+        .tab {
+            display: none;
+            padding: 20px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            min-width: 1400px;
+            margin: 20px;
+        }
+
+        #imageContainer {
+            margin-left: 10px;
+            margin-right: 10px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-top: 10px;
+            width: 500px;
+        }
+
+        #leftImage, #rightImage, #returnsImage, #fullReturnsImage {
+            width: 330px;
+            height: 140px;
+            border: solid;
+        }
+
+        #option-container {
+            margin-left: 10px;
+            margin-right: 10px;
+            width: 500px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        #left-column {
+            width: 15%;
+        }
+
+        #right-column {
+            width: 83%;
+        }
+
+        header {
+            display: flex;
+            justify-content: center;
+            background-color: #f0f0f0;
+        }
+
+        ticker-menu {
+            display: flex;
+            justify-content: left;
+        }
+
+        #homeTable, #tickerAnalysisTable, #buyTable, #sellTable, #transactionsTable, #lastSoldTable, #summaryTable, #briefSummaryTable, #lastTransactionTable, #currentSessionTable, #tickerBriefSummaryTable, #tickerTransactionTable, #tickerLastTransactionTable,
+        #homeTable th, #tickerAnalysisTable th, #buyTable th, #sellTable th, #transactionsTable th, #lastSoldTable th, #summaryTable th, #briefSummaryTable th, #lastTransactionTable th, #currentSessionTable th, #tickerBriefSummaryTable th, #tickerTransactionTable th, #tickerLastTransactionTable th,
+        #homeTable td, #tickerAnalysisTable td, #buyTable td, #sellTable td, #transactionsTable td, #lastSoldTable td, #summaryTable td, #briefSummaryTable td, #lastTransactionTable td, #currentSessionTable td, #tickerBriefSummaryTable td, #tickerTransactionTable td, #tickerLastTransactionTable td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: right;
+        }
+
+        #homeTable, #tickerAnalysisTable, #buyTable, #sellTable, #transactionsTable, #lastSoldTable, #summaryTable, #briefSummaryTable, #lastTransactionTable, #currentSessionTable, #tickerBriefSummaryTable, #tickerTransactionTable, #tickerLastTransactionTable {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .text-container {
+            margin-top: 15px;
+            font-size: 15px;
+        }
+
+        .green {
+            background-color: green;
+            color: white;
+            font-weight: bold;
+        }
+
+        .lightgreen {
+            background-color: lightgreen;
+            font-weight: bold;
+        }
+
+        .yellow {
+            background-color: yellow;
+            font-weight: bold;
+        }
+
+        .blue {
+            background-color: blue;
+            color: white;
+            font-weight: bold;
+        }
+
+        .lightblue {
+            background-color: lightblue;
+            font-weight: bold;
+        }
+
+        .orange {
+            background-color: orange;
+            font-weight: bold;
+        }
+
+        .red {
+            background-color: red;
+            color: white;
+            font-weight: bold;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .question-mark {
+            display: inline-block;
+            margin-left: 5px; /* Adjust as needed */
+            cursor: help;
+        }
+
+        .tooltip-text {
+            visibility: hidden;
+            width: 440px;
+            background-color: lightgray;
+            color: black;
+            text-align: left;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            margin-top: 25px; /* Adjust as needed */
+            margin-left: -480px; /* Adjust as needed */
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .rounded-border {
+            display: inline-block;
+            border: 2px solid #000;
+            border-radius: 50%;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            padding-left: 4px;
+            padding-right: 4px;
+        }
+
+        .fraction {
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+            .fraction .denominator {
+                border-bottom: 1px solid #000;
+            }
+
+            .fraction .denominator {
+                margin-top: 2px;
+            }
+    </style>
+</head>
+<body>
+    <ticker-menu>
+        <ul>
+            <li onmouseout="mouseOutMenu(this);" onmouseover="showTabOnHover('HomeTab')"><a href="#">Home</a></li>
+            <li onmouseout="mouseOutMenu(this);" onmouseover="showTabOnHover('TickerTab')"><a href="#">Ticker</a></li>
+            <li onmouseout="mouseOutMenu(this);" onmouseover="showTabOnHover('TickerAnalysisTab')"><a href="#">Ticker Analysis</a></li>
+            <li onmouseout="mouseOutMenu(this);" onmouseover="showTabOnHover('BuyTab')"><a href="#">Buy</a></li>
+            <li onmouseout="mouseOutMenu(this);" onmouseover="showTabOnHover('SellTab')"><a href="#">Sell</a></li>
+            <li onmouseout="mouseOutMenu(this);" onmouseover="showTabOnHover('BriefSummaryTab')"><a href="#">Brief</a></li>
+            <li onmouseout="mouseOutMenu(this);" onmouseover="showTabOnHover('LastSoldTab')"><a href="#">Last Sold</a></li>
+            <li onmouseout="mouseOutMenu(this);" onmouseover="showTabOnHover('LastTransactionTab')"><a href="#">Last Transaction</a></li>
+            <li onmouseout="mouseOutMenu(this);" onmouseover="showTabOnHover('CurrentSessionTab')"><a href="#">Current Session</a></li>
+        </ul>
+        <div>
+            <b>&nbsp;&nbsp;&nbsp;Last Refresh</b>: <span id="LastRefresh"></span>
+        </div>
+    </ticker-menu>
+    <div id="topSection">
+        <div id="option-container">
+            <div id="left-column">
+                <br>&nbsp;Ticker:<br>
+                <select id="tickerSelector" size=3 onchange="onSelectTicker()"></select>
+            </div>
+            <div id="right-column">
+                <br>
+                <div id="options-bar">
+                    <label><input type="radio" name="setOptions" value="all" onchange="populateTickerSelector(sSetType = this.value)" checked>&nbsp;All</label>
+                    <label><input type="radio" name="setOptions" value="buy" onchange="populateTickerSelector(sSetType = this.value)">&nbsp;Buy</label>
+                    <label><input type="radio" name="setOptions" value="sell" onchange="populateTickerSelector(sSetType = this.value)">&nbsp;Sell</label>
+                    <label><input type="radio" name="setOptions" value="held" onchange="populateTickerSelector(sSetType = this.value)">&nbsp;Held</label>
+                    <label><input type="radio" name="setOptions" value="wait" onchange="populateTickerSelector(sSetType = this.value)">&nbsp;Wait</label>
+                    &nbsp;&nbsp;==>&nbsp;<span id="buyOrSellDetailsCount"></span>&nbsp;Tickers
+                </div>
+                &nbsp;<span id="buyOrSellDetails"></span>
+                <p class="tooltip">
+                    <span class="question-mark"><b><span class="rounded-border">?</span></b></span>
+                    <span id="tickerHint" class="tooltip-text" style="margin-top: -15px; margin-left: 10px; width: 1000px;"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div id="TickerTab" class="tab">
+        <div id="imageContainer">
+            <div>
+                <header><h4 id="leftHeader">Left Item</h4></header>
+                <img id="leftImage" src="" alt="Left Image" title="" />
+            </div>
+            <div>
+                <header><h4 id="rightHeader">Right Item</h4></header>
+                <img id="rightImage" src="" alt="Right Image" title="" />
+            </div>
+            <div>
+                <header><h4 id="returnsHeader">Returns Item</h4></header>
+                <img id="returnsImage" src="" alt="Returns Image" title="" />
+            </div>
+            <div>
+                <header><h4 id="fullReturnsHeader">Full Returns Item</h4></header>
+                <img id="fullReturnsImage" src="" alt="Full Returns Image" title="" />
+            </div>
+        </div>
+        <div id="TickerLastTransactionTab" class="tab">
+            <div id="tickerLastTransactionTableContainer"></div>
+        </div>
+        <div id="TickerBriefSummaryTab" class="tab">
+            <div id="tickerBriefSummaryTableContainer"></div>
+        </div>
+        <div id="TickerTransactionTab" class="tab">
+            <div id="tickerTransactionTableContainer"></div>
+        </div>
+    </div>
+    <div id="HomeTab" class="tab">
+        <div id="homeTableContainer"></div>
+    </div>
+    <div id="TickerAnalysisTab" class="tab">
+        <div id="tickerAnalysisTableContainer"></div>
+    </div>
+    <div id="BuyTab" class="tab">
+        <span id="buyComments"></span>
+        <p class="tooltip">
+            <span class="question-mark"><b><span class="rounded-border">?</span></b></span>
+            <span id="buyHint" class="tooltip-text" style="margin-top: 25px; margin-left: -580px; width: 900px;"></span>
+        </p>
+        <div id="buyTableContainer"></div>
+    </div>
+    <div id="SellTab" class="tab">
+        <span id="sellComments"></span>
+        <p class="tooltip">
+            <span class="question-mark"><b><span class="rounded-border">?</span></b></span>
+            <span id="sellHint" class="tooltip-text" style="margin-top: 25px; margin-left: -570px; width: 900px;"></span>
+        </p>
+        <div id="sellTableContainer"></div>
+    </div>
+    <div id="BriefSummaryTab" class="tab">
+        <div id="briefSummaryTableContainer"></div>
+    </div>
+    <div id="TransactionsTab" class="tab">
+        <div id="transactionsTableContainer"></div>
+    </div>
+    <div id="SummaryTab" class="tab">
+        <div id="summaryTableContainer"></div>
+    </div>
+    <div id="LastSoldTab" class="tab">
+        <div id="lastSoldTableContainer"></div>
+    </div>
+    <div id="LastTransactionTab" class="tab">
+        <div id="LastTransactionTableContainer"></div>
+    </div>
+    <div id="CurrentSessionTab" class="tab">
+        <p id="CurrentSessionTotals"></p>
+        <div id="CurrentSessionTableContainer"></div>
+    </div>
+</body>
+</html>
+<script src="data.js"></script>
+<script src="UI.js"></script>
