@@ -5,7 +5,11 @@ node_modules
 Old
 __pycache__
 *.py
+*.csv
+*.xls
+*.xlsm
 *.txt
+*.pkl
 *.pickle
 *.pyproj
 *.sln
