@@ -1,8 +1,8 @@
-async function copyToClipboard(sText) {
+var sClipboard = "";
+
+async function copyToClipboard() {
     try {
-        await navigator.clipboard.writeText(sText);
-        alert(sText);
-        alert("Text copied to clipboard!");
+        await navigator.clipboard.writeText(sClipboard);
     } catch (err) {
         console.error("Failed to copy text:", err);
         alert("Failed to copy text: Permissions for clipboard access may be denied.");
@@ -553,6 +553,14 @@ function cellMoreColor(sTableName, vThresholds, sColumnIndex) {
     });
 }
 
+function getClipboardString(sTitle, oDictionary) {
+    sText = sTitle;
+    for (const sKey in oDictionary) {
+        sText += `${sKey}: ${oDictionary[sKey]}\n`;
+    }
+    return sText;
+}
+
 function showTabOnHover(tabName) {
     var tabs = document.getElementsByClassName("tab");
     for (var i = 0; i < tabs.length; i++) { tabs[i].style.display = "none"; }
@@ -579,42 +587,41 @@ function showTabOnHover(tabName) {
     document.getElementById('TickerTransactionTab').style.display = 'block';
     document.getElementById('TickerLastTransactionTab').style.display = 'block';
 
-    //oClipboard = document.getElementById('clipboard');
-    //switch (tabName) {
-    //    case 'HomeTab':
-    //        oClipboard.value = document.getElementById('homeTableContainer').textContent;
-    //        break;
-    //    case 'TickerTab':
-    //        oClipboard.value = document.getElementById('tickerLastTransactionTableContainer').textContent;
-    //        break;
-    //    case 'TickerAnalysisTab':
-    //        oClipboard.value = 'TickerAnalysisTab';
-    //        break;
-    //    case 'BuyTab':
-    //        oClipboard.value = 'BuyTab';
-    //        break;
-    //    case 'SellTab':
-    //        oClipboard.value = 'SellTab';
-    //        break;
-    //    case 'BriefSummaryTab':
-    //        oClipboard.value = 'BriefSummaryTab';
-    //        break;
-    //    case 'SummaryTab':
-    //        oClipboard.value = 'SummaryTab';
-    //        break;
-    //    case 'LastSoldTab':
-    //        oClipboard.value = 'LastSoldTab';
-    //        break;
-    //        break;
-    //    case 'LastTransactionTab':
-    //        oClipboard.value = 'LastTransactionTab';
-    //        break;
-    //    case 'CurrentSessionTab':
-    //        oClipboard.value = 'CurrentSessionTab';
-    //        break;
-    //    default:
-    //        oClipboard.value = 'Unknown';
-    //}
+    switch (tabName) {
+        case 'HomeTab':
+            sClipboard = getClipboardString(`Ticker Totals\n\n`, dictTotalsSummary);
+            break;
+        case 'TickerTab':
+            sClipboard = document.getElementById('tickerLastTransactionTableContainer').textContent;
+            break;
+        case 'TickerAnalysisTab':
+            sClipboard = document.getElementById('tickerLastTransactionTableContainer').textContent;
+            break;
+        case 'BuyTab':
+            sClipboard = document.getElementById('tickerLastTransactionTableContainer').textContent;
+            break;
+        case 'SellTab':
+            sClipboard = document.getElementById('tickerLastTransactionTableContainer').textContent;
+            break;
+        case 'BriefSummaryTab':
+            sClipboard = document.getElementById('tickerLastTransactionTableContainer').textContent;
+            break;
+        case 'SummaryTab':
+            sClipboard = document.getElementById('tickerLastTransactionTableContainer').textContent;
+            break;
+        case 'LastSoldTab':
+            sClipboard = document.getElementById('tickerLastTransactionTableContainer').textContent;
+            break;
+            break;
+        case 'LastTransactionTab':
+            sClipboard = document.getElementById('tickerLastTransactionTableContainer').textContent;
+            break;
+        case 'CurrentSessionTab':
+            sClipboard = document.getElementById('tickerLastTransactionTableContainer').textContent;
+            break;
+        default:
+            sClipboard = document.getElementById('tickerLastTransactionTableContainer').textContent;
+    }
 }
 
 function mouseOutMenu(oItem) {
