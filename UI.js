@@ -1,3 +1,14 @@
+async function copyToClipboard(sText) {
+    try {
+        await navigator.clipboard.writeText(sText);
+        alert(sText);
+        alert("Text copied to clipboard!");
+    } catch (err) {
+        console.error("Failed to copy text:", err);
+        alert("Failed to copy text: Permissions for clipboard access may be denied.");
+    }
+}
+
 function showTickerInfo(dictTableInfo, sTableContainer, sTableId, iaRound, iaFactor) {
     const table = document.createElement('table');
     table.classList.add("display");
@@ -567,6 +578,43 @@ function showTabOnHover(tabName) {
     document.getElementById('TickerBriefSummaryTab').style.display = 'block';
     document.getElementById('TickerTransactionTab').style.display = 'block';
     document.getElementById('TickerLastTransactionTab').style.display = 'block';
+
+    //oClipboard = document.getElementById('clipboard');
+    //switch (tabName) {
+    //    case 'HomeTab':
+    //        oClipboard.value = document.getElementById('homeTableContainer').textContent;
+    //        break;
+    //    case 'TickerTab':
+    //        oClipboard.value = document.getElementById('tickerLastTransactionTableContainer').textContent;
+    //        break;
+    //    case 'TickerAnalysisTab':
+    //        oClipboard.value = 'TickerAnalysisTab';
+    //        break;
+    //    case 'BuyTab':
+    //        oClipboard.value = 'BuyTab';
+    //        break;
+    //    case 'SellTab':
+    //        oClipboard.value = 'SellTab';
+    //        break;
+    //    case 'BriefSummaryTab':
+    //        oClipboard.value = 'BriefSummaryTab';
+    //        break;
+    //    case 'SummaryTab':
+    //        oClipboard.value = 'SummaryTab';
+    //        break;
+    //    case 'LastSoldTab':
+    //        oClipboard.value = 'LastSoldTab';
+    //        break;
+    //        break;
+    //    case 'LastTransactionTab':
+    //        oClipboard.value = 'LastTransactionTab';
+    //        break;
+    //    case 'CurrentSessionTab':
+    //        oClipboard.value = 'CurrentSessionTab';
+    //        break;
+    //    default:
+    //        oClipboard.value = 'Unknown';
+    //}
 }
 
 function mouseOutMenu(oItem) {
