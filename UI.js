@@ -1,4 +1,7 @@
 var sClipboard = "";
+const ciStringType = 0;
+const ciArrayType = 1;
+const ciDictionaryType = 2;
 
 async function copyToClipboard() {
     try {
@@ -112,7 +115,6 @@ function showTableInfo(dictTableInfo, sTableContainer, sTableId, iaRound, iaFact
 
 function showAnalysisTableInfo(dictTotalsSummary, sTableContainer) {
     document.getElementById(sTableContainer).innerHTML = `
-
     <h3>
         DDrINQ Individual Daily Return Summary From
         ${dictTotalsSummary["StartDate"]}
@@ -553,10 +555,27 @@ function cellMoreColor(sTableName, vThresholds, sColumnIndex) {
     });
 }
 
-function getClipboardString(sTitle, oDictionary) {
-    sText = sTitle;
-    for (const sKey in oDictionary) {
-        sText += `${sKey}: ${oDictionary[sKey]}\n`;
+function getClipboardString(iStructureType, sTitle, sHeader, oStructure) {
+    sText = sTitle + '\n';
+    switch (iStructureType) {
+        case ciStringType:
+            sText += sHeader += oStructure + '\n';
+            break;
+        case ciArrayType:
+            sText += sHeader + '\n';
+            for (const sItem of oStructure) {
+                sText += `${sItem}\n`;
+            }
+            break;
+        case ciDictionaryType:
+            if (sHeader != '') {
+                sText += sHeader + '\n';
+            }
+            for (const sKey in oStructure) {
+                sText += `${sKey}: ${oStructure[sKey]}\n`;
+            }
+            break;
+        default:
     }
     return sText;
 }
@@ -587,40 +606,49 @@ function showTabOnHover(tabName) {
     document.getElementById('TickerTransactionTab').style.display = 'block';
     document.getElementById('TickerLastTransactionTab').style.display = 'block';
 
-    switch (tabName) {
-        case 'HomeTab':
-            sClipboard = getClipboardString(`Ticker Totals\n\n`, dictTotalsSummary);
-            break;
-        case 'TickerTab':
-            sClipboard = document.getElementById('tickerLastTransactionTableContainer').textContent;
-            break;
-        case 'TickerAnalysisTab':
-            sClipboard = document.getElementById('tickerLastTransactionTableContainer').textContent;
-            break;
-        case 'BuyTab':
-            sClipboard = document.getElementById('tickerLastTransactionTableContainer').textContent;
-            break;
-        case 'SellTab':
-            sClipboard = document.getElementById('tickerLastTransactionTableContainer').textContent;
-            break;
-        case 'BriefSummaryTab':
-            sClipboard = document.getElementById('tickerLastTransactionTableContainer').textContent;
-            break;
-        case 'SummaryTab':
-            sClipboard = document.getElementById('tickerLastTransactionTableContainer').textContent;
-            break;
-        case 'LastSoldTab':
-            sClipboard = document.getElementById('tickerLastTransactionTableContainer').textContent;
-            break;
-            break;
-        case 'LastTransactionTab':
-            sClipboard = document.getElementById('tickerLastTransactionTableContainer').textContent;
-            break;
-        case 'CurrentSessionTab':
-            sClipboard = document.getElementById('tickerLastTransactionTableContainer').textContent;
-            break;
-        default:
-            sClipboard = document.getElementById('tickerLastTransactionTableContainer').textContent;
+    sSelectedTicker = document.getElementById("tickerSelector").value;
+    if (sSelectedTicker != '') {
+        switch (tabName) {
+            case 'HomeTab':
+                sClipboard = getClipboardString(ciDictionaryType, 'Ticker Totals:', '', dictTotalsSummary);
+                break;
+            case 'TickerTab':
+                sSelectedTicker = document.getElementById('tickerSelector').value;
+                sClipboard =
+                    getClipboardString(ciStringType, 'Last Transaction:', dictLastTransaction['Headers'], sSelectedTicker + ', ' + dictLastTransaction['Data'][sSelectedTicker])
+                + '\n'
+                + getClipboardString(ciArrayType, 'Annual Totals:', dictDetailSummaryTableInfo['Headers'], dictDetailSummaryTableInfo['Data'][sSelectedTicker])
+                    + '\n'
+                    + getClipboardString(ciArrayType, 'Buy/Sell Transactions:', dictBuySellTableInfo['Headers'], dictBuySellTableInfo['Data'][sSelectedTicker])
+                    + '\n';
+                break;
+            case 'TickerAnalysisTab':
+                sClipboard = getClipboardString(ciDictionaryType, sSelectedTicker + ' Totals:', '', dictTickerTotals[sSelectedTicker]);
+                break;
+            case 'BuyTab':
+                sClipboard = getClipboardString(ciDictionaryType, 'Next Buy Tickers:', dictBuyTickerInfo['Headers'], dictBuyTickerInfo['Data']);
+                break;
+            case 'SellTab':
+                sClipboard = getClipboardString(ciDictionaryType, 'Next Sell Tickers:', dictSellTickerInfo['Headers'], dictSellTickerInfo['Data']);
+                break;
+            case 'BriefSummaryTab':
+                sClipboard = getClipboardString(ciArrayType, sSelectedTicker + ' Annual Returns:', dictBriefSummaryTableInfo['Headers'], dictBriefSummaryTableInfo['Data'][sSelectedTicker]);
+                break;
+            case 'LastSoldTab':
+                sClipboard = getClipboardString(ciDictionaryType, 'Last Buy/Sell Transaction:', dictLastBuySell['Headers'], dictLastBuySell['Data']);
+                break;
+                break;
+            case 'LastTransactionTab':
+                sClipboard = getClipboardString(ciDictionaryType, 'Last Transaction:', dictLastTransaction['Headers'], dictLastTransaction['Data']);
+                break;
+            case 'CurrentSessionTab':
+                sClipboard =
+                    getClipboardString(ciDictionaryType, 'Current Session:', dictCurrentSession['Headers'], dictCurrentSession['Data'])
+                    + '\n'
+                    + getClipboardString(ciDictionaryType, 'Current Session Counts:', '', dictCurrentSessionCounts)
+                    + '\n';
+                break;
+        }
     }
 }
 
