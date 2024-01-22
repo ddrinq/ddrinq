@@ -159,7 +159,7 @@ function showAnalysisTableInfo(dictTotalsSummary, sTableContainer) {
                     <span class="tooltip-text" style="margin-top: -15px; margin-left: 10px; width: 500px; text-align: center;">
                         Percentage of tickers which had a positive return for each buy sell<br>
                         pair of trades for <b>${dictTotalsSummary["TickerCount"]}</b> tickers as of ${dictTotalsSummary["StartDate"]}. Any ticker which had<br>
-                        one million shares traded daily in 2020 was chosen.
+                        one million shares traded daily in 2020 was chosen. The list has been updated in 2024.
                     </span>
                 </span>
                 positive.
@@ -168,7 +168,7 @@ function showAnalysisTableInfo(dictTotalsSummary, sTableContainer) {
                     <span class="tooltip-text" style="margin-top: -15px; margin-left: 10px; width: 500px; text-align: center;">
                         Percentage of tickers which had a negative return for each buy sell<br>
                         pair of trades for <b>${dictTotalsSummary["TickerCount"]}</b> tickers as of ${dictTotalsSummary["StartDate"]}. Any ticker which had<br>
-                        one million shares traded daily in 2020 was chosen.
+                        one million shares traded daily in 2020 was chosen. The list has been updated in 2024.
                     </span>
                 </span>
                 negative.
@@ -176,8 +176,8 @@ function showAnalysisTableInfo(dictTotalsSummary, sTableContainer) {
                     <b>${fn(dictTotalsSummary["BuySellCumulativeDailyReturnMedian"], '', '%', 4, 100)}</b>
                     <span class="tooltip-text" style="margin-top: -15px; margin-left: 10px; width: 500px; text-align: center;">
                         Median daily return for a buy sell strategy for each buy sell pair of<br>
-                        trades for <b>${dictTotalsSummary["TickerCount"]}</b> tickers as of ${dictTotalsSummary["StartDate"]}. Any ticker which had one<br>
-                        million shares traded daily in 2020 was chosen.
+                        trades for <b>${dictTotalsSummary["TickerCount"]}</b> tickers as of ${dictTotalsSummary["StartDate"]}. Any ticker which had<br>
+                        one million shares traded daily in 2020 was chosen. The list has been updated in 2024.
                     </span>
                 </span>
                 median daily return.
@@ -185,8 +185,8 @@ function showAnalysisTableInfo(dictTotalsSummary, sTableContainer) {
                     <b>${fn(dictTotalsSummary["BuySellCumulativeDailyReturnAverage"], '', '%', 4, 100)}</b>
                     <span class="tooltip-text" style="margin-top: -15px; margin-left: 10px; width: 500px; text-align: center;">
                         Average daily return for a buy sell strategy for each buy sell pair of<br>
-                        trades for <b>${dictTotalsSummary["TickerCount"]}</b> tickers as of ${dictTotalsSummary["StartDate"]}. Any ticker which had one<br>
-                        million shares traded daily in 2020 was chosen.
+                        trades for <b>${dictTotalsSummary["TickerCount"]}</b> tickers as of ${dictTotalsSummary["StartDate"]}. Any ticker which had<br>
+                        one million shares traded daily in 2020 was chosen. The list has been updated in 2024.
                     </span>
                 </span>
                 average daily return.
@@ -238,7 +238,7 @@ function showAnalysisTableInfo(dictTotalsSummary, sTableContainer) {
                     <span class="tooltip-text" style="margin-top: -15px; margin-left: 10px; width: 500px; text-align: center;">
                         Percentage of tickers which had a positive return at the end of each<br>
                         year for a buy sell strategy of <b>${dictTotalsSummary["TickerCount"]}</b> tickers as of ${dictTotalsSummary["StartDate"]}. Any ticker<br>
-                        which had one million shares traded daily in 2020 was chosen.
+                        which had one million shares traded daily in 2020 was chosen. The list has been updated in 2024.
                     </span>
                 </span>
                 positive.
@@ -247,7 +247,7 @@ function showAnalysisTableInfo(dictTotalsSummary, sTableContainer) {
                     <span class="tooltip-text" style="margin-top: -15px; margin-left: 10px; width: 500px; text-align: center;">
                         Percentage of tickers which had a negative return at the end of each<br>
                         year for a buy sell strategy of <b>${dictTotalsSummary["TickerCount"]}</b> tickers as of ${dictTotalsSummary["StartDate"]}. Any ticker<br>
-                        which had one million shares traded daily in 2020 was chosen.
+                        which had one million shares traded daily in 2020 was chosen. The list has been updated in 2024.
                     </span>
                 </span>
                 negative.
@@ -256,7 +256,7 @@ function showAnalysisTableInfo(dictTotalsSummary, sTableContainer) {
                     <span class="tooltip-text" style="margin-top: -15px; margin-left: 10px; width: 500px; text-align: center;">
                         Median daily return for a buy/sell strategy of <b>${dictTotalsSummary["TickerCount"]}</b> tickers at the end of<br>
                         each year as of ${dictTotalsSummary["StartDate"]}. Any ticker which had one million shares<br>
-                        traded daily in 2020 was chosen.
+                        traded daily in 2020 was chosen. The list has been updated in 2024.
                     </span>
                 </span>
                 median daily return.
@@ -265,7 +265,7 @@ function showAnalysisTableInfo(dictTotalsSummary, sTableContainer) {
                     <span class="tooltip-text" style="margin-top: -15px; margin-left: 10px; width: 500px; text-align: center;">
                         Average daily return for a buy/sell strategy of <b>${dictTotalsSummary["TickerCount"]}</b> tickers at the end of<br>
                         each year as of ${dictTotalsSummary["StartDate"]}. Any ticker which had one million shares<br>
-                        traded daily in 2020 was chosen.
+                        traded daily in 2020 was chosen. The list has been updated in 2024.
                     </span>
                 </span>
                 average daily return.
@@ -368,7 +368,7 @@ function showAnalysisTableInfo(dictTotalsSummary, sTableContainer) {
                     <span class="tooltip-text" style="margin-top: -15px; margin-left: 10px; width: 500px; text-align: center;">
                         Percentage of tickers which had a positive return for a buy/hold<br>
                         strategy of <b>${dictTotalsSummary["TickerCount"]}</b> tickers as of ${dictTotalsSummary["StartDate"]}. Any ticker which had<br>
-                        one million shares traded daily in 2020 was chosen.
+                        one million shares traded daily in 2020 was chosen. The list has been updated in 2024.
                     </span>
                 </span>
                 positive.
@@ -377,7 +377,7 @@ function showAnalysisTableInfo(dictTotalsSummary, sTableContainer) {
                     <span class="tooltip-text" style="margin-top: -15px; margin-left: 10px; width: 500px; text-align: center;">
                         Percentage of tickers which had a negative return for a buy/hold<br>
                         strategy of <b>${dictTotalsSummary["TickerCount"]}</b> tickers as of ${dictTotalsSummary["StartDate"]}. Any ticker which had<br>
-                        one million shares traded daily in 2020 was chosen.
+                        one million shares traded daily in 2020 was chosen. The list has been updated in 2024.
                     </span>
                 </span>
                 negative.
@@ -386,7 +386,7 @@ function showAnalysisTableInfo(dictTotalsSummary, sTableContainer) {
                     <span class="tooltip-text" style="margin-top: -15px; margin-left: 10px; width: 500px; text-align: center;">
                         Median daily return for a buy/hold strategy of <b>${dictTotalsSummary["TickerCount"]}</b> tickers as of<br>
                         ${dictTotalsSummary["StartDate"]}. Any ticker which had one million shares traded daily<br>
-                        in 2020 was chosen.
+                        in 2020 was chosen. The list has been updated in 2024.
                     </span>
                 </span>
                 median daily return.
@@ -395,7 +395,7 @@ function showAnalysisTableInfo(dictTotalsSummary, sTableContainer) {
                     <span class="tooltip-text" style="margin-top: -15px; margin-left: 10px; width: 500px; text-align: center;">
                         Average daily return for a buy/hold strategy of <b>${dictTotalsSummary["TickerCount"]}</b> tickers as of<br>
                         ${dictTotalsSummary["StartDate"]}. Any ticker which had one million shares traded daily<br>
-                        in 2020 was chosen.
+                        in 2020 was chosen. The list has been updated in 2024.
                     </span>
                 </span>
                 average daily return.
@@ -473,7 +473,7 @@ function showAnalysisTableInfo(dictTotalsSummary, sTableContainer) {
         <span class="tooltip">
             <b>${dictTotalsSummary["TickerCount"]}</b>
             <span class="tooltip-text" style="margin-top: -15px; margin-left: 10px; width: 600px; text-align: center;">
-                Tickers were chosen in 2020.  Any ticker which has one million shares traded daily.
+                Tickers were chosen in 2020. The list has been updated in 2024. Any ticker which has one million shares traded daily.
             </span>
         </span>
         Tickers
@@ -908,7 +908,7 @@ document.getElementById("sellHint").innerHTML =
     'The sell conditions were refreshed at <b>' + dictTotalsSummary["RefreshTimestamp"].substring(0, 19) + ' PST</b> and take effect the next trade day.<br>' +
     'If the price drops at or below the suggested sell price then the sell conditions are satisfied.';
 document.getElementById("tickerHint").innerHTML =
-    '' + saTicker.length + ' Tickers were chosen in 2020.  The signals have been back tested since <b>' + dictTotalsSummary["StartDate"] + '</b>.<br>' +
+    '' + saTicker.length + ' Tickers were chosen in 2020. The list has been updated in 2024. The list has been updated in 2024. The signals have been back tested since <b>' + dictTotalsSummary["StartDate"] + '</b>.<br>' +
     'Most of these securities have a minimum volume of one million shares a day.  This ensures liquidity.<br>' +
     'The charts compare returns for a security if it is held, if one executes the suggested trades, and also if one maintains a diversified portfolio.';
 

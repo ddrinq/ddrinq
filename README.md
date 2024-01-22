@@ -10,7 +10,7 @@ On posting a trade request, it becomes visible to others.
 This site provides an early preview of potential trade requests, offering more advanced notice.
 The pertinent outcomes of technical analysis conducted are made available and accessible to users accessing this site.
 
-The strategy involves scrutinizing over 500 securities to discern trends.
+The strategy involves scrutinizing over 1000 securities to discern trends.
 Signals are generated at the close of each trading day, becoming effective the subsequent trading day.
 Any security that satisfies a predefined set of criteria are selected.
 These chosen securities are distinguished by their volatility and high liquidity,
