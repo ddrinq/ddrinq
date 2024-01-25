@@ -649,6 +649,7 @@ function showTabOnHover(tabName) {
                     + '\n';
                 break;
         }
+        document.getElementById("sViewerClipboard").innerText = sClipboard;
     }
 }
 
