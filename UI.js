@@ -669,14 +669,14 @@ function onSelectTicker() {
     var selectedTicker = document.getElementById("tickerSelector").value;
 
     var leftTextSuffix = " 500 days";
-    var leftImageSuffix = "_None_500.png"
+    var leftImageSuffix = "_500.png"
     document.getElementById("leftHeader").innerText = selectedTicker + leftTextSuffix;
     document.getElementById("leftImage").title = selectedTicker + leftTextSuffix;
     document.getElementById("leftImage").src = "./500/" + selectedTicker + leftImageSuffix;
     document.getElementById("leftImage").alt = selectedTicker + leftImageSuffix;
 
     var rightTextSuffix = " 250 days";
-    var rightImageSuffix = "_None_250.png"
+    var rightImageSuffix = "_250.png"
     document.getElementById("rightHeader").innerText = selectedTicker + rightTextSuffix;
     document.getElementById("rightImage").title = selectedTicker + rightTextSuffix;
     document.getElementById("rightImage").src = "./250/" + selectedTicker + rightImageSuffix;
