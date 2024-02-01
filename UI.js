@@ -610,43 +610,41 @@ function showTabOnHover(tabName) {
     if (sSelectedTicker != '') {
         switch (tabName) {
             case 'HomeTab':
-                sClipboard = getClipboardString(ciDictionaryType, 'Ticker Totals:', '', dictTotalsSummary);
+                //sClipboard = getClipboardString(ciDictionaryType, 'Ticker Totals:', '', dictTotalsSummary);
                 break;
             case 'TickerTab':
-                sSelectedTicker = document.getElementById('tickerSelector').value;
-                sClipboard =
-                    getClipboardString(ciStringType, 'Last Transaction:', dictLastTransaction['Headers'], sSelectedTicker + ', ' + dictLastTransaction['Data'][sSelectedTicker])
-                + '\n'
-                + getClipboardString(ciArrayType, 'Annual Totals:', dictDetailSummaryTableInfo['Headers'], dictDetailSummaryTableInfo['Data'][sSelectedTicker])
-                    + '\n'
-                    + getClipboardString(ciArrayType, 'Buy/Sell Transactions:', dictBuySellTableInfo['Headers'], dictBuySellTableInfo['Data'][sSelectedTicker])
-                    + '\n';
+                //sClipboard =
+                //    getClipboardString(ciStringType, 'Last Transaction:', dictLastTransaction['Headers'], sSelectedTicker + ', ' + dictLastTransaction['Data'][sSelectedTicker])
+                //    + '\n'
+                //    + getClipboardString(ciArrayType, 'Annual Totals:', dictDetailSummaryTableInfo['Headers'], dictDetailSummaryTableInfo['Data'][sSelectedTicker])
+                //    + '\n'
+                //    + getClipboardString(ciArrayType, 'Buy/Sell Transactions:', dictBuySellTableInfo['Headers'], dictBuySellTableInfo['Data'][sSelectedTicker])
+                //    + '\n';
                 break;
             case 'TickerAnalysisTab':
-                sClipboard = getClipboardString(ciDictionaryType, sSelectedTicker + ' Totals:', '', dictTickerTotals[sSelectedTicker]);
+                //sClipboard = getClipboardString(ciDictionaryType, sSelectedTicker + ' Totals:', '', dictTickerTotals[sSelectedTicker]);
                 break;
             case 'BuyTab':
-                sClipboard = getClipboardString(ciDictionaryType, 'Next Buy Tickers:', dictBuyTickerInfo['Headers'], dictBuyTickerInfo['Data']);
+                //sClipboard = getClipboardString(ciDictionaryType, 'Next Buy Tickers:', dictBuyTickerInfo['Headers'], dictBuyTickerInfo['Data']);
                 break;
             case 'SellTab':
-                sClipboard = getClipboardString(ciDictionaryType, 'Next Sell Tickers:', dictSellTickerInfo['Headers'], dictSellTickerInfo['Data']);
+                //sClipboard = getClipboardString(ciDictionaryType, 'Next Sell Tickers:', dictSellTickerInfo['Headers'], dictSellTickerInfo['Data']);
                 break;
             case 'BriefSummaryTab':
-                sClipboard = getClipboardString(ciArrayType, sSelectedTicker + ' Annual Returns:', dictBriefSummaryTableInfo['Headers'], dictBriefSummaryTableInfo['Data'][sSelectedTicker]);
+                //sClipboard = getClipboardString(ciArrayType, sSelectedTicker + ' Annual Returns:', dictBriefSummaryTableInfo['Headers'], dictBriefSummaryTableInfo['Data'][sSelectedTicker]);
                 break;
             case 'LastSoldTab':
-                sClipboard = getClipboardString(ciDictionaryType, 'Last Buy/Sell Transaction:', dictLastBuySell['Headers'], dictLastBuySell['Data']);
-                break;
+                //sClipboard = getClipboardString(ciDictionaryType, 'Last Buy/Sell Transaction:', dictLastBuySell['Headers'], dictLastBuySell['Data']);
                 break;
             case 'LastTransactionTab':
-                sClipboard = getClipboardString(ciDictionaryType, 'Last Transaction:', dictLastTransaction['Headers'], dictLastTransaction['Data']);
+                //sClipboard = getClipboardString(ciDictionaryType, 'Last Transaction:', dictLastTransaction['Headers'], dictLastTransaction['Data']);
                 break;
             case 'CurrentSessionTab':
-                sClipboard =
-                    getClipboardString(ciDictionaryType, 'Current Session:', dictCurrentSession['Headers'], dictCurrentSession['Data'])
-                    + '\n'
-                    + getClipboardString(ciDictionaryType, 'Current Session Counts:', '', dictCurrentSessionCounts)
-                    + '\n';
+                //sClipboard =
+                //    getClipboardString(ciDictionaryType, 'Current Session:', dictCurrentSession['Headers'], dictCurrentSession['Data'])
+                //    + '\n'
+                //    + getClipboardString(ciDictionaryType, 'Current Session Counts:', '', dictCurrentSessionCounts)
+                //    + '\n';
                 break;
         }
         document.getElementById("sViewerClipboard").innerText = sClipboard.replace(/\n/g, '__');
@@ -665,72 +663,60 @@ function fn(sValue, sPrefix = '', sSuffix = '', iDigits = 2, iFactor = 1) {
     return sPrefix + (parseFloat(sValue) * iFactor).toFixed(iDigits) + sSuffix;
 }
 
+function loadWebPage(sWebPageContainer, sWebPage, sHeaderContainer, sHeader) {
+    var oHeader = document.getElementById(sHeaderContainer)
+    oHeader.innerText = sHeader;
+    oHeader.title = sHeader;
+
+    var iFrame = document.createElement('iframe');
+    iFrame.src = sWebPage;
+    var oContainer = document.getElementById(sWebPageContainer);
+    oContainer.innerHTML = '';
+    oContainer.appendChild(iFrame);
+}
+
 function onSelectTicker() {
-    var selectedTicker = document.getElementById("tickerSelector").value;
+    var sSelectedTicker = document.getElementById("tickerSelector").value;
+    loadWebPage("twoYearHistoryPlot", './500/' + sSelectedTicker + '.html', "twoYearHistoryPlotHeader", sSelectedTicker + ' 500 Days')
+    loadWebPage("oneYearHistoryPlot", './250/' + sSelectedTicker + '.html', "oneYearHistoryPlotHeader", sSelectedTicker + ' 250 Days')
+    loadWebPage("oneYearReturnsPlot", './Year/' + sSelectedTicker + '.html', "oneYearReturnsPlotHeader", sSelectedTicker + ' One Year Returns')
+    loadWebPage("fullReturnsPlot", './All/' + sSelectedTicker + '.html', "fullReturnsPlotHeader", sSelectedTicker + ' Full Returns')
 
-    var leftTextSuffix = " 500 days";
-    var leftImageSuffix = "_500.png"
-    document.getElementById("leftHeader").innerText = selectedTicker + leftTextSuffix;
-    document.getElementById("leftImage").title = selectedTicker + leftTextSuffix;
-    document.getElementById("leftImage").src = "./500/" + selectedTicker + leftImageSuffix;
-    document.getElementById("leftImage").alt = selectedTicker + leftImageSuffix;
-
-    var rightTextSuffix = " 250 days";
-    var rightImageSuffix = "_250.png"
-    document.getElementById("rightHeader").innerText = selectedTicker + rightTextSuffix;
-    document.getElementById("rightImage").title = selectedTicker + rightTextSuffix;
-    document.getElementById("rightImage").src = "./250/" + selectedTicker + rightImageSuffix;
-    document.getElementById("rightImage").alt = selectedTicker + rightImageSuffix;
-
-    var returnsTextSuffix = " Returns";
-    var returnsImageSuffix = "_Returns.png"
-    document.getElementById("returnsHeader").innerText = selectedTicker + returnsTextSuffix;
-    document.getElementById("returnsImage").title = selectedTicker + returnsTextSuffix;
-    document.getElementById("returnsImage").src = "./One/" + selectedTicker + returnsImageSuffix;
-    document.getElementById("returnsImage").alt = selectedTicker + returnsImageSuffix;
-
-    var fullReturnsTextSuffix = " Full Span";
-    var fullReturnsImageSuffix = "_Full_Returns.png"
-    document.getElementById("fullReturnsHeader").innerText = selectedTicker + fullReturnsTextSuffix;
-    document.getElementById("fullReturnsImage").title = selectedTicker + fullReturnsTextSuffix;
-    document.getElementById("fullReturnsImage").src = "./All/" + selectedTicker + fullReturnsImageSuffix;
-    document.getElementById("fullReturnsImage").alt = selectedTicker + fullReturnsImageSuffix;
-
-    var sTickerInfo = dictBuyTickerInfo['Data'][selectedTicker];
+    var sTickerInfo = dictBuyTickerInfo['Data'][sSelectedTicker];
     var obuyOrSellDetails = document.getElementById("buyOrSellDetails");
     if (sTickerInfo === undefined) {
-        sTickerInfo = dictSellTickerInfo['Data'][selectedTicker];
+        sTickerInfo = dictSellTickerInfo['Data'][sSelectedTicker];
         if (sTickerInfo === undefined) {
             obuyOrSellDetails.innerHTML = '';
         } else {
             var saColumnValues = sTickerInfo.split(',');
-            obuyOrSellDetails.innerHTML = 'Sell:' + fn(saColumnValues[0], '$', '', 2) + ', Last:' + fn(saColumnValues[1], '$', '', 2) + ', Delta:' + fn(saColumnValues[3], '$', '', 2) + '; ' + saColumnValues[4] + '%';
+            obuyOrSellDetails.innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;Sell:' + fn(saColumnValues[0], '$', '', 2) + ', Last:' + fn(saColumnValues[1], '$', '', 2) + ', Delta:' + fn(saColumnValues[3], '$', '', 2) + '; ' + saColumnValues[4] + '%';
         }
     } else {
         var saColumnValues = sTickerInfo.split(',');
-        obuyOrSellDetails.innerHTML = 'Buy:' + fn(saColumnValues[0], '$', '', 2) + ', Last:' + fn(saColumnValues[1], '$', '', 2) + ', Delta:' + fn(saColumnValues[3], '$', '', 2) + '; ' + saColumnValues[4] + '%';
+        obuyOrSellDetails.innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;Buy:' + fn(saColumnValues[0], '$', '', 2) + ', Last:' + fn(saColumnValues[1], '$', '', 2) + ', Delta:' + fn(saColumnValues[3], '$', '', 2) + '; ' + saColumnValues[4] + '%';
     }
-    showSelectedTableInfo(selectedTicker, dictBuySellTableInfo, 'transactionsTableContainer', 'transactionsTable', aiRound = iaTransactionsRound, iaFactor = iaTransactionsFactor);
+    showSelectedTableInfo(sSelectedTicker, dictBuySellTableInfo, 'transactionsTableContainer', 'transactionsTable', aiRound = iaTransactionsRound, iaFactor = iaTransactionsFactor);
     cellMoreColor(sTableName = 'transactionsTable', vThresholds = vaTransactionsTableThresholds, sColumnIndex = sTransactionsTableThresholdOrderColumnIndex);
     $(document).ready(function () { $('#transactionsTable').DataTable({ "order": [[iTransactionsTableThresholdOrderColumnIndex, 'desc']] }); });
 
-    showSelectedTableInfo(selectedTicker, dictDetailSummaryTableInfo, 'tickerBriefSummaryTableContainer', 'tickerBriefSummaryTable', aiRound = iaDetailSummaryRound, iaFactor = iaDetailSummaryFactor);
+    showSelectedTableInfo(sSelectedTicker, dictDetailSummaryTableInfo, 'tickerBriefSummaryTableContainer', 'tickerBriefSummaryTable', aiRound = iaDetailSummaryRound, iaFactor = iaDetailSummaryFactor);
     cellMoreColor(sTableName = 'tickerBriefSummaryTable', vThresholds = vaDetailSummaryTableThresholds, sColumnIndex = sDetailSummaryTableThresholdOrderColumnIndex);
     $(document).ready(function () { $('#tickerBriefSummaryTable').DataTable({ "order": [[iDetailSummaryTableThresholdOrderColumnIndex, 'desc']] }); });
 
-    showSelectedTableInfo(selectedTicker, dictBriefSummaryTableInfo, 'briefSummaryTableContainer', 'briefSummaryTable', aiRound = iaBriefSummaryRound, iaFactor = iaBriefSummaryFactor);
+    showSelectedTableInfo(sSelectedTicker, dictBriefSummaryTableInfo, 'briefSummaryTableContainer', 'briefSummaryTable', aiRound = iaBriefSummaryRound, iaFactor = iaBriefSummaryFactor);
     cellMoreColor(sTableName = 'briefSummaryTable', vThresholds = vaBriefSummaryTableThresholds, sColumnIndex = sBriefSummaryTableThresholdOrderColumnIndex);
     $(document).ready(function () { $('#briefSummaryTable').DataTable({ "order": [[iBriefSummaryTableThresholdOrderColumnIndex, 'desc']] }); });
 
-    var dictTickerLastTransaction = { "Headers": dictLastTransaction['Headers'], "Data": { [selectedTicker]: dictLastTransaction['Data'][selectedTicker] } };
+    var dictTickerLastTransaction = { "Headers": dictLastTransaction['Headers'], "Data": { [sSelectedTicker]: dictLastTransaction['Data'][sSelectedTicker] } };
     showTickerInfo(dictTickerInfo = dictTickerLastTransaction, sTickerContainer = 'tickerLastTransactionTableContainer', sTableId = 'tickerLastTransactionTable', iaRound = iaLastTransactionRound, iaFactor = iaLastTransactionFactor);
 
-    showAnalysisTableInfo(dictTickerTotals[selectedTicker], 'tickerAnalysisTableContainer');
-    document.querySelector('[onmouseover="showTabOnHover(\'TickerAnalysisTab\')"] a').textContent = "Analysis: " + selectedTicker;
+    showAnalysisTableInfo(dictTickerTotals[sSelectedTicker], 'tickerAnalysisTableContainer');
+    document.querySelector('[onmouseover="showTabOnHover(\'TickerAnalysisTab\')"] a').textContent = "Analysis: " + sSelectedTicker;
 
     sTickerTransactionDailyReturnColumnIndex = "6";
     iTickerTransactionBuyDateColumnIndex = 1;
-    showSelectedTableInfo(selectedTicker, dictBuySellTableInfo, 'tickerTransactionTableContainer', 'tickerTransactionTable', aiRound = iaTransactionsRound, iaFactor = iaTransactionsFactor);
+    showSelectedTableInfo(sSelectedTicker, dictBuySellTableInfo, 'tickerTransactionTableContainer', 'tickerTransactionTable', aiRound = iaTransactionsRound, iaFactor = iaTransactionsFactor);
     cellMoreColor(sTableName = 'tickerTransactionTable', vThresholds = vaTransactionsTableThresholds, sColumnIndex = sTickerTransactionDailyReturnColumnIndex);
     $(document).ready(function () { $('#tickerTransactionTable').DataTable({ "order": [[iTickerTransactionBuyDateColumnIndex, 'desc']] }); });
 }
@@ -762,7 +748,9 @@ function populateTickerSelector(sSetType) {
         oTickerSelector.appendChild(option);
     }
     oTickerSelector.focus();
-    oTickerSelector.selectedIndex = 0;
+    if (oTickerSelector.length > 0) {
+        oTickerSelector.selectedIndex = 0;
+    }
     onSelectTicker();
 }
 
@@ -894,7 +882,7 @@ cellMoreColor(sTableName = 'currentSessionTable', vThresholds = vaCurrentSession
 $(document).ready(function () { $('#currentSessionTable').DataTable({ "order": [[iCurrentSessionTableThresholdOrderColumnIndex, 'desc']] }); });
 document.body.style.zoom = "190%";
 showTabOnHover('TickerTab');
-window.onload = populateTickerSelector;
+
 showAnalysisTableInfo(dictTotalsSummary, 'homeTableContainer');
 
 document.getElementById("buyComments").innerHTML = '<b>(' + dictTotalsSummary["CloseDate"] + ') Next Day Buy Signal</b>: If the price drops below the buy price and then rises to that price then buy.';
@@ -932,3 +920,6 @@ document.getElementById("CurrentSessionTotals").innerHTML =
     '<span class="tooltip"><b>' + fn(dictCurrentSessionCounts["Realized Daily Return"], "", "%", 4, 100) +
     '</b><span class="tooltip-text" style="margin-top: 15px; margin-left: 10px; width: 450px; text-align: center;">' +
     'Sum("Days Held" * "Sold Daily Return") / Sum("Days Held")</span></span>';
+
+window.onload = populateTickerSelector;
+oTickerSelector.selectedIndex = 0;
