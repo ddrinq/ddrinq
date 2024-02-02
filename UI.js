@@ -656,6 +656,7 @@ function showTabOnHover(tabName) {
     document.getElementById('TickerTransactionTab').style.display = 'block';
     document.getElementById('TickerLastTransactionTab').style.display = 'block';
     sClipboardTab = tabName;
+    generateClipboardContents()
 }
 
 function mouseOutMenu(oItem) {
