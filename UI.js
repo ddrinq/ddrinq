@@ -1,10 +1,54 @@
-var sClipboard = "";
+var sClipboardTab = "";
 const ciStringType = 0;
 const ciArrayType = 1;
 const ciDictionaryType = 2;
 
 async function copyToClipboard() {
     try {
+        var sSelectedTicker = document.getElementById("tickerSelector").value;
+        var sClipboard = '';
+        if (sSelectedTicker != '') {
+            switch (sClipboardTab) {
+                case 'HomeTab':
+                    sClipboard = getClipboardString(ciDictionaryType, 'Ticker Totals:', '', dictTotalsSummary);
+                    break;
+                case 'TickerTab':
+                    sClipboard =
+                        getClipboardString(ciStringType, 'Last Transaction:', dictLastTransaction['Headers'], sSelectedTicker + ', ' + dictLastTransaction['Data'][sSelectedTicker])
+                        + '\n'
+                        + getClipboardString(ciArrayType, 'Annual Totals:', dictDetailSummaryTableInfo['Headers'], dictDetailSummaryTableInfo['Data'][sSelectedTicker])
+                        + '\n'
+                        + getClipboardString(ciArrayType, 'Buy/Sell Transactions:', dictBuySellTableInfo['Headers'], dictBuySellTableInfo['Data'][sSelectedTicker])
+                        + '\n';
+                    break;
+                case 'TickerAnalysisTab':
+                    sClipboard = getClipboardString(ciDictionaryType, sSelectedTicker + ' Totals:', '', dictTickerTotals[sSelectedTicker]);
+                    break;
+                case 'BuyTab':
+                    sClipboard = getClipboardString(ciDictionaryType, 'Next Buy Tickers:', dictBuyTickerInfo['Headers'], dictBuyTickerInfo['Data']);
+                    break;
+                case 'SellTab':
+                    sClipboard = getClipboardString(ciDictionaryType, 'Next Sell Tickers:', dictSellTickerInfo['Headers'], dictSellTickerInfo['Data']);
+                    break;
+                case 'BriefSummaryTab':
+                    sClipboard = getClipboardString(ciArrayType, sSelectedTicker + ' Annual Returns:', dictBriefSummaryTableInfo['Headers'], dictBriefSummaryTableInfo['Data'][sSelectedTicker]);
+                    break;
+                case 'LastSoldTab':
+                    sClipboard = getClipboardString(ciDictionaryType, 'Last Buy/Sell Transaction:', dictLastBuySell['Headers'], dictLastBuySell['Data']);
+                    break;
+                case 'LastTransactionTab':
+                    sClipboard = getClipboardString(ciDictionaryType, 'Last Transaction:', dictLastTransaction['Headers'], dictLastTransaction['Data']);
+                    break;
+                case 'CurrentSessionTab':
+                    sClipboard =
+                        getClipboardString(ciDictionaryType, 'Current Session:', dictCurrentSession['Headers'], dictCurrentSession['Data'])
+                        + '\n'
+                        + getClipboardString(ciDictionaryType, 'Current Session Counts:', '', dictCurrentSessionCounts)
+                        + '\n';
+                    break;
+            }
+        }
+
         await navigator.clipboard.writeText(sClipboard);
     } catch (err) {
         console.error("Failed to copy text:", err);
@@ -605,50 +649,7 @@ function showTabOnHover(tabName) {
     document.getElementById('TickerBriefSummaryTab').style.display = 'block';
     document.getElementById('TickerTransactionTab').style.display = 'block';
     document.getElementById('TickerLastTransactionTab').style.display = 'block';
-
-    sSelectedTicker = document.getElementById("tickerSelector").value;
-    if (sSelectedTicker != '') {
-        switch (tabName) {
-            case 'HomeTab':
-                //sClipboard = getClipboardString(ciDictionaryType, 'Ticker Totals:', '', dictTotalsSummary);
-                break;
-            case 'TickerTab':
-                //sClipboard =
-                //    getClipboardString(ciStringType, 'Last Transaction:', dictLastTransaction['Headers'], sSelectedTicker + ', ' + dictLastTransaction['Data'][sSelectedTicker])
-                //    + '\n'
-                //    + getClipboardString(ciArrayType, 'Annual Totals:', dictDetailSummaryTableInfo['Headers'], dictDetailSummaryTableInfo['Data'][sSelectedTicker])
-                //    + '\n'
-                //    + getClipboardString(ciArrayType, 'Buy/Sell Transactions:', dictBuySellTableInfo['Headers'], dictBuySellTableInfo['Data'][sSelectedTicker])
-                //    + '\n';
-                break;
-            case 'TickerAnalysisTab':
-                //sClipboard = getClipboardString(ciDictionaryType, sSelectedTicker + ' Totals:', '', dictTickerTotals[sSelectedTicker]);
-                break;
-            case 'BuyTab':
-                //sClipboard = getClipboardString(ciDictionaryType, 'Next Buy Tickers:', dictBuyTickerInfo['Headers'], dictBuyTickerInfo['Data']);
-                break;
-            case 'SellTab':
-                //sClipboard = getClipboardString(ciDictionaryType, 'Next Sell Tickers:', dictSellTickerInfo['Headers'], dictSellTickerInfo['Data']);
-                break;
-            case 'BriefSummaryTab':
-                //sClipboard = getClipboardString(ciArrayType, sSelectedTicker + ' Annual Returns:', dictBriefSummaryTableInfo['Headers'], dictBriefSummaryTableInfo['Data'][sSelectedTicker]);
-                break;
-            case 'LastSoldTab':
-                //sClipboard = getClipboardString(ciDictionaryType, 'Last Buy/Sell Transaction:', dictLastBuySell['Headers'], dictLastBuySell['Data']);
-                break;
-            case 'LastTransactionTab':
-                //sClipboard = getClipboardString(ciDictionaryType, 'Last Transaction:', dictLastTransaction['Headers'], dictLastTransaction['Data']);
-                break;
-            case 'CurrentSessionTab':
-                //sClipboard =
-                //    getClipboardString(ciDictionaryType, 'Current Session:', dictCurrentSession['Headers'], dictCurrentSession['Data'])
-                //    + '\n'
-                //    + getClipboardString(ciDictionaryType, 'Current Session Counts:', '', dictCurrentSessionCounts)
-                //    + '\n';
-                break;
-        }
-        document.getElementById("sViewerClipboard").innerText = sClipboard.replace(/\n/g, '__');
-    }
+    sClipboardTab = tabName;
 }
 
 function mouseOutMenu(oItem) {
