@@ -47,8 +47,7 @@ function generateClipboardContents() {
                 break;
         }
     }
-    var oViewerClipboard = document.getElementById("sViewerClipboard");
-    oViewerClipboard.innerHTML = sClipboard;
+    document.getElementById("sViewerClipboard").innerHTML = sClipboard;
     return sClipboard;
 }
 
