@@ -247,7 +247,7 @@
 </head>
 <script>
     window.fbAsyncInit = function () {
-        FB.init({appId: '1094379575033831', cookie: true, xfbml: true, version: 'v18.0'});
+        FB.init({ appId: '1094379575033831', cookie: true, xfbml: true, version: 'v18.0' });
         FB.AppEvents.logPageView();
     };
 
@@ -259,7 +259,7 @@
             js.src = "https://connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }
-        (document, 'script', 'facebook-jssdk')
+            (document, 'script', 'facebook-jssdk')
     );
 </script>
 <body>
@@ -382,3 +382,30 @@
 </html>
 <script src="data.js"></script>
 <script src="UI.js"></script>
+<script>
+    function resetSelector() {
+        saTickerSet = saTicker;
+        document.getElementById("buyOrSellDetailsCount").innerHTML = saTickerSet.length;
+        var oTickerSelector = document.getElementById("tickerSelector");
+        oTickerSelector.innerHTML = '';
+        saSortedTickerSet = saTickerSet.sort()
+        for (var sTicker of saSortedTickerSet) {
+            var option = document.createElement("option");
+            option.value = sTicker;
+            option.text = sTicker;
+            oTickerSelector.appendChild(option);
+        }
+        oTickerSelector.focus();
+        if (oTickerSelector.length > 0) {
+            oTickerSelector.selectedIndex = 0;
+        }
+    }
+
+    window.onload = resetSelector();
+    onSelectTicker();
+    oTickerSelector.selectedIndex = 0;
+</script>
+<!-- <script src="data.js"></script> -->
+// <script>
+//     window.onload = resetSelector();
+// </script>

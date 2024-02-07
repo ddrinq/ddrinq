@@ -928,5 +928,5 @@ document.getElementById("CurrentSessionTotals").innerHTML =
     '</b><span class="tooltip-text" style="margin-top: 15px; margin-left: 10px; width: 450px; text-align: center;">' +
     'Sum("Days Held" * "Sold Daily Return") / Sum("Days Held")</span></span>';
 
-window.onload = populateTickerSelector;
-oTickerSelector.selectedIndex = 0;
+//window.onload = populateTickerSelector;
+//oTickerSelector.selectedIndex = 0;
