@@ -634,6 +634,7 @@ function showTabOnHover(tabName) {
     for (var i = 0; i < tabs.length; i++) { tabs[i].style.display = "none"; }
     document.getElementById(tabName).style.display = "block";
     oTopSectionStyle = document.getElementById('topSection').style
+
     if ((tabName === 'HomeTab') || (tabName === 'TickerAnalysisTab') || (tabName === 'BuyTab') || (tabName === 'SellTab') ||
         (tabName === 'SummaryTab') || (tabName === 'LastSoldTab') || (tabName === 'LastTransactionTab') || (tabName === 'CurrentSessionTab')
     ) {
@@ -928,5 +929,8 @@ document.getElementById("CurrentSessionTotals").innerHTML =
     '</b><span class="tooltip-text" style="margin-top: 15px; margin-left: 10px; width: 450px; text-align: center;">' +
     'Sum("Days Held" * "Sold Daily Return") / Sum("Days Held")</span></span>';
 
-//window.onload = populateTickerSelector;
-//oTickerSelector.selectedIndex = 0;
+$(document).ready(function () {
+    populateTickerSelector;
+    document.getElementById("tickerSelector").selectedIndex = 0;
+    $('select[name="tickerSelector"]').val($('select[name="tickerSelector"] option:first-child').val());
+});
