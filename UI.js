@@ -923,11 +923,11 @@ document.getElementById("CurrentSessionTotals").innerHTML =
     ' (' + fn(dictCurrentSessionCounts["Sold Rate"], '', '%', 0, 100) + ' success rate).<br>' +
     'The ' + dictCurrentSessionCounts["Sold Count"] + ' buy/sell pairs of transactions have an average daily return of ' +
     '<span class="tooltip"><b>' + fn(dictCurrentSessionCounts["Average Daily Return"], '', '%', 4, 100) +
-    '</b><span class="tooltip-text" style="margin-top: 15px; margin-left: 10px; width: 250px; text-align: center;">Average("Sold Daily Return")</span></span>' +
+    '</b><span class="tooltip-text" style="margin-top: 15px; margin-left: 10px; width: 250px; text-align: center;">Average("Daily Return")</span></span>' +
     ' and a realized average return of ' +
     '<span class="tooltip"><b>' + fn(dictCurrentSessionCounts["Realized Daily Return"], "", "%", 4, 100) +
     '</b><span class="tooltip-text" style="margin-top: 15px; margin-left: 10px; width: 450px; text-align: center;">' +
-    'Sum("Days Held" * "Sold Daily Return") / Sum("Days Held")</span></span>';
+    'Sum("Days Held" * "Daily Return") / Sum("Days Held")</span></span>';
 
 $(document).ready(function () {
     populateTickerSelector;
