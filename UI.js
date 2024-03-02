@@ -883,8 +883,8 @@ vaCurrentSessionBooleanTableThresholds = [
 ];
 iCurrentSessionTableThresholdOrderColumnIndex = 13;
 sCurrentSessionTableThresholdOrderColumnIndex = "" + iCurrentSessionTableThresholdOrderColumnIndex;
-iaCurrentSessionRound = [null, 2, 2, null, 2, null, null, 2, null, null, 2, 0, 4, null, 2, null, 2, 2, 2, 4];
-iaCurrentSessionFactor = [null, null, null, null, null, null, null, null, null, null, null, null, 100, null, null, null, null, null, null, 100];
+iaCurrentSessionRound = [null, 2, 2, null, 2, null, 2, null, null, null, 2, 0, null, 2, 4, null, 2, null, 2, 2, 2, 4];
+iaCurrentSessionFactor = [null, null, null, null, null, null, null, null, null, null, null, null, null, null, 100, null, null, null, null, null, null, 100];
 showTickerInfo(dictTickerInfo = dictCurrentSession, sTickerContainer = 'CurrentSessionTableContainer', sTableId = 'currentSessionTable', iaRound = iaCurrentSessionRound, iaFactor = iaCurrentSessionFactor);
 cellMoreColor(sTableName = 'currentSessionTable', vThresholds = vaCurrentSessionTableThresholds, sColumnIndex = sCurrentSessionTableThresholdOrderColumnIndex);
 $(document).ready(function () { $('#currentSessionTable').DataTable({ "order": [[iCurrentSessionTableThresholdOrderColumnIndex, 'desc']] }); });
