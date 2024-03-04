@@ -881,12 +881,12 @@ vaCurrentSessionBooleanTableThresholds = [
     { class: 'lightgreen', value: 'True' },
     { class: 'yellow', value: 'False' }
 ];
-iCurrentSessionTableThresholdOrderColumnIndex = 13;
+iCurrentSessionTableThresholdOrderColumnIndex = 15;
 sCurrentSessionTableThresholdOrderColumnIndex = "" + iCurrentSessionTableThresholdOrderColumnIndex;
-iaCurrentSessionRound = [null, 2, 2, null, 2, null, 2, null, null, null, 2, 0, null, 2, 4, null, 2, null, 2, 2, 2, 4];
-iaCurrentSessionFactor = [null, null, null, null, null, null, null, null, null, null, null, null, null, null, 100, null, null, null, null, null, null, 100];
+iaCurrentSessionRound = [null, 2, 2, null, 2, null, 2, null, null, null, 2, 0, null, 2, null, 2, null, 2, 2, 2, 2, 4, 4];
+iaCurrentSessionFactor = [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 100];
 showTickerInfo(dictTickerInfo = dictCurrentSession, sTickerContainer = 'CurrentSessionTableContainer', sTableId = 'currentSessionTable', iaRound = iaCurrentSessionRound, iaFactor = iaCurrentSessionFactor);
-cellMoreColor(sTableName = 'currentSessionTable', vThresholds = vaCurrentSessionTableThresholds, sColumnIndex = sCurrentSessionTableThresholdOrderColumnIndex);
+//cellMoreColor(sTableName = 'currentSessionTable', vThresholds = vaCurrentSessionTableThresholds, sColumnIndex = sCurrentSessionTableThresholdOrderColumnIndex);
 $(document).ready(function () { $('#currentSessionTable').DataTable({ "order": [[iCurrentSessionTableThresholdOrderColumnIndex, 'desc']] }); });
 document.body.style.zoom = "190%";
 showTabOnHover('TickerTab');
